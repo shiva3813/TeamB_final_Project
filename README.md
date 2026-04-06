@@ -55,6 +55,43 @@ SmartQuizzer Live is an AI-powered quiz generator built using **Python and Strea
 
 ---
 
+## 🏗 Architecture
+
+```mermaid
+graph TD
+    User((User)) <--> |React / Tailwind| Frontend[Frontend UI Layer]
+    Frontend <--> |REST API| Backend[Flask Server Engine]
+    subgraph AI_CLOUD[Groq AI Infrastructure]
+    Backend <--> |Secure API Stream| Llama[Llama 3.3 70B Model]
+    end
+    Backend <--> |Query/Store| DB[(SQLite Database)]
+```
+
+---
+
+## 🔄 Workflow
+
+```mermaid
+flowchart TD
+    Start([User Request]) --> Parser[Content Parsing & Sanitization]
+    Parser --> PromptEngine[Dynamic Prompt Construction]
+    
+    subgraph AI_Core [Inference Layer]
+    PromptEngine --> Groq[Groq Llama 3.3 API]
+    Groq --> Schema[JSON Schema Validation]
+    end
+    
+    Schema --> LogicGate{Logic Gate}
+    LogicGate -->|Success| StudyHub[Generate Study Aids]
+    LogicGate -->|Success| QuizGen[Generate Adaptive Questions]
+    LogicGate -->|Error| Retry[Prompt Refinement]
+    
+    QuizGen --> DB[(SQLite Storage)]
+    StudyHub --> UI[Frontend React Delivery]
+```
+
+---
+
 ## ▶️ Getting Started
 
 Follow these steps to run the application locally on your machine.
@@ -178,6 +215,11 @@ This project was developed by a team of four members:
   - Handled system integration
 
 - **Lithika D** – UI Developer
+  - Designed and developed user interface
+  - Improved user experience (UX)
+  - Integrated frontend with backend
+
+- **Santhosh S** – UI Developer
   - Designed and developed user interface
   - Improved user experience (UX)
   - Integrated frontend with backend
