@@ -10,3 +10,4 @@ mysql-connector-python
 groq
 pdf2image
 pytesseract
+python-dotenv
