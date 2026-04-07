@@ -1,3 +1,6 @@
+import os
+import json
+import math
 import random
 import re
 import tempfile
@@ -6,11 +9,18 @@ from collections import Counter, defaultdict
 from datetime import datetime
 from io import BytesIO
 from pathlib import Path
+from dotenv import load_dotenv
+from groq import Groq
+
 import pdfplumber
 import plotly.express as px
 import streamlit as st
-load_dotenv()
 from docx import Document
+
+load_dotenv()
+
+# Initialize Groq client
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
 try:
     import pytesseract
 except ImportError:
